@@ -14,11 +14,11 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserDAO userDAO;
 
-//    @Override
-//    @Transactional
-//    public void createUsersTable() {
-//        userDAO.createUsersTable();
-//    }
+    @Override
+    @Transactional
+    public void createUsersTable() {
+        userDAO.createUsersTable();
+    }
 
     @Override
     @Transactional

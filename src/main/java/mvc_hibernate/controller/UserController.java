@@ -16,6 +16,12 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/")
+    public String createTable() {
+        userService.createUsersTable();
+        return "welcome";
+    }
+
+    @RequestMapping("/all")
     public String showAllUsers(Model model) {
         List<User> usersList = userService.getAllUsers();
         model.addAttribute("allUsers", usersList);
@@ -32,7 +38,7 @@ public class UserController {
     @RequestMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:/";
+        return "redirect:/all";
     }
 
     @RequestMapping("/updateUser/{id}")
@@ -46,6 +52,6 @@ public class UserController {
     @RequestMapping("/deleteUser/{id}")
      public String deleteUser(@PathVariable(value = "id") int id) {
         userService.removeUser(id);
-        return "redirect:/";
+        return "redirect:/all";
      }
 }

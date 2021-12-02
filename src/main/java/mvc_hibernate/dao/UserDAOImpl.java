@@ -13,17 +13,17 @@ public class UserDAOImpl implements UserDAO {
     private EntityManager entityManager;
 
 
-//    @Override
-//    public void createUsersTable() {
-//
-//        sessionFactory.getCurrentSession().createSQLQuery("CREATE TABLE if not exists users  " +
-//                        "(id int auto_increment, " +
-//                        " name VARCHAR(16) null , " +
-//                        " lastname VARCHAR (16) null , " +
-//                        " age int null , " +
-//                        " PRIMARY KEY (id))")
-//                .addEntity(User.class);
-//    }
+    @Override
+    public void createUsersTable() {
+
+        entityManager.createNativeQuery("CREATE TABLE if not exists users  " +
+                        "(id int auto_increment, " +
+                        " name VARCHAR(16) null , " +
+                        " lastname VARCHAR (16) null , " +
+                        " age int null , " +
+                        " PRIMARY KEY (id))")
+                .executeUpdate();
+    }
 
     @Override
     public List<User> getAllUsers() {
@@ -32,11 +32,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void saveUser(User user) {
-        if (user.getId() == 0) {
-            entityManager.persist(user);
-        } else {
         entityManager.merge(user);
-        }
     }
 
     @Override
