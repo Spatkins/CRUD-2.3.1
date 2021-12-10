@@ -1,4 +1,4 @@
-package mvc_hibernate.config;
+package web.configs;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

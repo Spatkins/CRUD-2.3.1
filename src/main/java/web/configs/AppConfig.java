@@ -1,4 +1,4 @@
-package mvc_hibernate.config;
+package web.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:db.properties")
-@ComponentScan(value = "mvc_hibernate")
+@ComponentScan(value = "web")
 @EnableTransactionManagement
 public class AppConfig {
 
@@ -55,7 +55,7 @@ public class AppConfig {
         final LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(getDataSource());
-        em.setPackagesToScan("mvc_hibernate");
+        em.setPackagesToScan("web");
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(hibernateProperties());
