@@ -2,7 +2,7 @@ package web.repositories;
 
 import java.util.List;
 
-public interface Repository<T> {
+public interface Repositories<T> {
 
 
     List<T> getList();

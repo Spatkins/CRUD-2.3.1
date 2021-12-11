@@ -1,13 +1,14 @@
 package web.repositories;
 
+import org.springframework.stereotype.Repository;
 import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@org.springframework.stereotype.Repository
-public class UserRepository implements Repository<User> {
+@Repository
+public class UserRepository implements Repositories<User> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -34,6 +35,7 @@ public class UserRepository implements Repository<User> {
 
     @Override
     public User getByName(String username) {
-        return entityManager.find(User.class, username);
+        return entityManager.createQuery("from User u where u.username =:username", User.class)
+                .setParameter("username", username).getSingleResult();
     }
 }

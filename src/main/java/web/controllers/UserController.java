@@ -16,11 +16,11 @@ public class UserController {
 //        this.userService = userService;
 //    }
 
-//    @RequestMapping("/")
-//    public String startPage() {
-//
-//        return "welcome";
-//    }
+    @RequestMapping("/")
+    public String startPage() {
+
+        return "welcome";
+    }
 
 //    @RequestMapping("/all")
 //    public String showAllUsers(Model model) {
@@ -77,8 +77,13 @@ public class UserController {
         return "hello";
     }
 
-//    @RequestMapping(value = "login", method = RequestMethod.GET)
-//    public String loginPage() {
-//        return "login";
-//    }
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String loginPage() {
+        return "login";
+    }
+
+    @RequestMapping(value = "error")
+    public String errorPage() {
+        return "denied";
+    }
 }

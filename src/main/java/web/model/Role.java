@@ -1,5 +1,8 @@
 package web.model;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -12,7 +15,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NonNull
     private String name;
 
     public Role() {
@@ -35,12 +38,12 @@ public class Role implements GrantedAuthority {
         return name;
     }
 
-    public void setName(String role) {
-        this.name = role;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String getAuthority() {
-        return name;
+        return getName();
     }
 }
