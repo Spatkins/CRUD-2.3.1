@@ -9,7 +9,7 @@ public interface Services<T> {
 
     T getById(Long id);
 
-//    T getByName(String name);
+    T getByName(String name);
 
     void remove(Long id);
 

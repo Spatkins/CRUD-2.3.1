@@ -31,11 +31,11 @@ public class  UserService implements Services<User> {
         userRepository.save(user);
     }
 
-//    @Override
-//    @Transactional
-//    public User getByName(String name) {
-//        return userRepository.getByName(name) ;
-//    }
+    @Override
+    @Transactional
+    public User getByName(String name) {
+        return userRepository.getByName(name) ;
+    }
 
     @Override
     @Transactional

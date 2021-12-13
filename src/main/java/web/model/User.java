@@ -33,13 +33,19 @@ public class User implements UserDetails {
     private Set<Role> roles = new HashSet<>();
 
     public User() {
-
     }
 
     public User(String name, String password, String email) {
         this.username = name;
         this.password = password;
         this.email = email;
+    }
+
+    public Map<String, String> getRolesList() {
+        Map<String, String> list = new HashMap<>();
+        list.put("ADMIN", "ROLE_ADMIN");
+        list.put("USER", "ROLE_USER");
+        return list;
     }
 
     public Set<Role> getRoles() {

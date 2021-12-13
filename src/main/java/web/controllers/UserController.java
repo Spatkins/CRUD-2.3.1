@@ -1,60 +1,37 @@
 package web.controllers;
 
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sun.security.acl.PrincipalImpl;
+import web.model.User;
+import web.services.Services;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class UserController {
 
-//    private final Service<User> userService;
-//
-//    public UserController(Service<User> userService) {
-//        this.userService = userService;
-//    }
+    private final Services<User> userService;
 
-    @RequestMapping("/")
+    public UserController(Services<User> userService) {
+        this.userService = userService;
+    }
+
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String startPage() {
 
         return "welcome";
     }
 
-//    @RequestMapping("/all")
-//    public String showAllUsers(Model model) {
-//        List<User> usersList = userService.getList();
-//        model.addAttribute("allUsers", usersList);
-//        return "all-users";
-//    }
-//
-//    @RequestMapping("/addNewUser")
-//    public String addNewUser(Model model) {
-//        User user = new User();
-//        model.addAttribute("user", user);
-//        return "user-info";
-//    }
-//
-//    @RequestMapping("/saveUser")
-//    public String saveUser(@ModelAttribute("user") User user) {
-//        userService.save(user);
-//        return "redirect:/all";
-//    }
-//
-//    @RequestMapping("/updateUser/{id}")
-//    public String updateUser(@PathVariable(value = "id") Long id, Model model) {
-//        User user = userService.getById(id);
-//        model.addAttribute("user", user);
-//
-//        return "user-info";
-//    }
-//
-//    @RequestMapping("/deleteUser/{id}")
-//     public String deleteUser(@PathVariable(value = "id") Long id) {
-//        userService.remove(id);
-//        return "redirect:/all";
-//     }
+
 //
 //     @GetMapping("/authenticated")
 //    public String authenticatedUsersPage(Principal principal) {
@@ -67,14 +44,12 @@ public class UserController {
 //        return "read prrofile page";
 //     }
 
-    @RequestMapping(value = "hello", method = RequestMethod.GET)
-    public String printWelcome(ModelMap model) {
-        List<String> messages = new ArrayList<>();
-        messages.add("Hello!");
-        messages.add("I'm Spring MVC-SECURITY application");
-        messages.add("5.2.0 version by sep'19 ");
-        model.addAttribute("messages", messages);
-        return "hello";
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    public String printWelcome(Model model) {
+        User user = userService.getByName(SecurityContextHolder.getContext()
+                .getAuthentication().getName());
+        model.addAttribute("user", user);
+        return "user/hellouser";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)

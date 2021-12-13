@@ -8,26 +8,30 @@
 <div th:switch="${allUsers}">
     <h2 th:case="null">No users yet!</h2>
     <div th:case="*">
+        <a th:href="@{/logout}">Logout</a>
+        <br><br>
         <h2> All Users</h2>
         <table border="1" cellpadding="10">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>LastName</th>
-                <th>Age</th>
+                <th>EMAIL</th>
+                <th>USERNAME</th>
+                <th>PASSWORD</th>
+                <th>ROLES</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${allUsers}">
+                <td th:utext="${user.getEmail()}"></td>
                 <td th:utext="${user.getUsername()}"></td>
-                <td th:utext="${user.getLastName()}"></td>
-                <td th:utext="${user.getAge()}"></td>
+                <td th:utext="${user.getPassword()}"></td>
+                <td th:utext="${user.getRoles()}"></td>
                 <td>
-                    <a th:href="@{/updateUser/{id}(id=${user.id})}">
+                    <a th:href="@{/admin/updateUser/{id}(id=${user.id})}">
                         <input type="submit" value="Update"/>
                     </a>
-                    <a th:href="@{/deleteUser/{id}(id=${user.id})}">
+                    <a th:href="@{/admin/deleteUser/{id}(id=${user.id})}">
                         <input type="submit" value="Delete"/>
                     </a>
                 </td>
@@ -37,9 +41,13 @@
         <br>
         <br>
     </div>
-    <form th:method="GET" th:action="@{/addNewUser}">
+    <form th:method="GET" th:action="@{/admin/addNewUser}">
         <input type="submit" value="Add new user"/>
     </form>
+    <br>
+    <a th:href = "@{/admin}">
+        <input type="submit" value="Go Back"/>
+    </a>
 </div>
 </body>
 </html>
