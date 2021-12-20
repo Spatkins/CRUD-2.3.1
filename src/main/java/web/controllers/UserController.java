@@ -31,23 +31,9 @@ public class UserController {
         return "welcome";
     }
 
-
-//
-//     @GetMapping("/authenticated")
-//    public String authenticatedUsersPage(Principal principal) {
-//        User user = userService.getByName(principal.getName());
-//        return "secured part of web service" + principal.getName() + " " + user.getEmail();
-//     }
-//
-//     @GetMapping("/read_profile")
-//    public String pageForReadProfile() {
-//        return "read prrofile page";
-//     }
-
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public String printWelcome(Model model) {
-        User user = userService.getByName(SecurityContextHolder.getContext()
-                .getAuthentication().getName());
+    public String printWelcome(Model model, Principal principal) {
+        User user = userService.getByName(principal.getName());
         model.addAttribute("user", user);
         return "user/hellouser";
     }
